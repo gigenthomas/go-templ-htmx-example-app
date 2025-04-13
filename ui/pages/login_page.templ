@@ -16,7 +16,7 @@ func (obj *LoginInputFormParams) FormAppearsValid() bool {
 
 templ LoginPage(loginFormParams LoginInputFormParams) {
 	@components.Base() {
-		@components.HomepageTopNav(true)
+		@components.HomepageTopNav(true,false)
 		<div class="w-screen h-screen bg-gradient-to-r from-slate-200 to-gray-200">
 			<div class="w-screen h-screen flex justify-center items-center">
 				<div class="w-full h-fit sm:max-w-xs md:max-w-sm lg:max-w-sm">

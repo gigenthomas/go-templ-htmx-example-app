@@ -25,6 +25,7 @@ func main() {
 	}
 
 	serverConfiguration := configure.NewUIHttpConfiguration(ctx, logger, serviceConfiguration)
+	logger.Info("configured server", slog.String("address", serverConfiguration.Server.Addr))
 	go serverConfiguration.StartServer()
 
 	logger.Info("API Service Running")

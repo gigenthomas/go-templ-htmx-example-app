@@ -120,6 +120,7 @@ func NewUIHttpConfiguration(ctx context.Context, logger *slog.Logger, serviceCon
 
 func (obj *HttpConfiguration) StartServer() {
 	err := obj.Server.ListenAndServe()
+	obj.logger.Info("server started", slog.String("address", obj.Server.Addr))
 	if errors.Is(err, http.ErrServerClosed) {
 		obj.logger.Info("server closed")
 	} else if err != nil {

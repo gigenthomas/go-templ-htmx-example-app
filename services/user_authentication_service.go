@@ -142,3 +142,20 @@ func (obj *UserAuthenticationService) PasswordMatchesUserPassword(passwordHash, 
 	err := bcrypt.CompareHashAndPassword([]byte(passwordHash), []byte(password))
 	return err == nil
 }
+
+func (obj *UserAuthenticationService) ValidateToken(ctx context.Context, tokenStr string) (*JWTScopeClaims, error) {
+	parsedToken, err := jwt.ParseWithClaims(tokenStr, &JWTScopeClaims{}, func(token *jwt.Token) (interface{}, error) {
+		return []byte(settings.JWT_SECRET_KEY), nil
+	})
+
+	if err != nil {
+		return nil, ErrParsingJWTToken
+	}
+
+	claims, ok := parsedToken.Claims.(*JWTScopeClaims)
+	if !ok || !parsedToken.Valid {
+		return nil, ErrInvalidToken
+	}
+
+	return claims, nil
+}

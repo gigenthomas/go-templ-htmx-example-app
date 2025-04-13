@@ -24,7 +24,7 @@ func ConfigureUIHandlers(ctx context.Context, echoHandler *echo.Echo, logger *sl
 	})
 
 	var publicHandler []handlers.PublicUIHandler = []handlers.PublicUIHandler{
-		pageHandlers.NewHomePageHandler(ctx, logger),
+		pageHandlers.NewHomePageHandler(ctx, logger, &configuration.ServiceMesh),
 		pageHandlers.NewSignupPageHandler(ctx, logger, &configuration.ServiceMesh),
 		pageHandlers.NewLoginPageHandler(ctx, logger, &configuration.ServiceMesh),
 	}
